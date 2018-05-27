@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{StaticResource backgroundColor}"
+             x:Class="XamarinWebservice.View.ListPage">
+        <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh" Command="{Binding RefreshCommand}"/>
+        <ToolbarItem Text="+" Command="{Binding ItemAddCommand}" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView x:Name="_listView" ItemsSource="{Binding bookList}" IsRefreshing="{Binding refreshList}" Footer="">
+  <ListView.ContextMenu>
+    </ListView.ContextMenu>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding title}"  Detail="{Binding publishDate}">
+                    <TextCell.ContextActions>
+                        <MenuItem Text="Düzenle" CommandParameter="{Binding .}"  Clicked="Clicked_Update"/>
+                        <MenuItem Text="Sil"  IsDestructive="true" Clicked="Clicked_Delete" CommandParameter="{Binding isbn}"/>
+                        </TextCell.ContextActions>
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
